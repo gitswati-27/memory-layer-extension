@@ -1,3 +1,5 @@
+import { saveMemory } from "../services/api";
+
 export default function Popup() {
   return (
     <div style={{ padding: "16px", width: "300px" }}>
@@ -23,7 +25,10 @@ export default function Popup() {
       type: "EXTRACT_PAGE",
     },
     (response) => {
-      console.log(response);
+        saveMemory(response)
+        .then((result) => {
+          console.log("Saved:", result);
+        });
     }
   );
 }

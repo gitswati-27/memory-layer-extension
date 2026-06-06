@@ -24,6 +24,7 @@ model Memory {
 
   collectionId String?
   collection   Collection? @relation(fields: [collectionId], references: [id])
+  chunks       MemoryChunk[]
 }
 
 model MemoryChunk {

@@ -1,5 +1,6 @@
 import type { Request, Response } from "express";
 import { prisma } from "../db/prisma.js";
+import { chunkText } from "../utils/chunkText.js";
 
 export const saveMemory = async (
   req: Request,
@@ -15,6 +16,15 @@ export const saveMemory = async (
         content,
         collectionId,
       },
+    });
+
+    const chunks = chunkText(content);
+
+    await prisma.memoryChunk.createMany({
+        data: chunks.map((chunk) => ({
+        content: chunk,
+        memoryId: memory.id,
+      })),
     });
 
     res.status(201).json(memory);

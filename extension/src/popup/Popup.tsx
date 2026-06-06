@@ -1,5 +1,12 @@
 import { useEffect, useState } from "react";
-import {saveMemory, deleteMemory, getRecentMemories } from "../services/api";
+
+import {
+  getRecentMemories,
+  saveMemory,
+  deleteMemory,
+  getCollections,
+  createCollection,
+} from "../services/api";
 
 type Memory = {
   id: string;
@@ -8,11 +15,20 @@ type Memory = {
   content: string;
 };
 
+type Collection = {
+  id: string;
+  name: string;
+};
+
 export default function Popup() {
   const [memories, setMemories] = useState<Memory[]>([]);
+  const [collections, setCollections] = useState<Collection[]>([]);
+  const [selectedCollection, setSelectedCollection] =
+    useState("");
 
   useEffect(() => {
     loadMemories();
+    loadCollections();
   }, []);
 
   async function loadMemories() {
@@ -24,14 +40,16 @@ export default function Popup() {
     }
   }
 
-  async function handleDelete(id: string) {
+  async function loadCollections() {
     try {
-      await deleteMemory(id);
-
-      await loadMemories();
-    }   catch (error) {
-        console.error(error);
-      }
+      const data = await getCollections();
+      setCollections(data);
+    } catch (error) {
+      console.error(
+        "Failed to fetch collections",
+        error
+      );
+    }
   }
 
   async function handleSave() {
@@ -49,7 +67,10 @@ export default function Popup() {
       },
       async (response) => {
         try {
-          await saveMemory(response);
+          await saveMemory({
+            ...response,
+            collectionId: selectedCollection,
+          });
 
           await loadMemories();
 
@@ -61,9 +82,78 @@ export default function Popup() {
     );
   }
 
+  async function handleDelete(id: string) {
+    try {
+      await deleteMemory(id);
+
+      await loadMemories();
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
+  async function handleCreateCollection() {
+  const name = window.prompt(
+    "Enter collection name"
+  );
+
+  if (!name?.trim()) return;
+
+  try {
+    const collection =
+      await createCollection(name);
+
+    await loadCollections();
+
+    setSelectedCollection(
+      collection.id
+    );
+  } catch (error) {
+    console.error(error);
+  }
+}
+
   return (
-    <div style={{ padding: "16px", width: "300px" }}>
+    <div
+      style={{
+        padding: "16px",
+        width: "320px",
+      }}
+    >
       <h1>AI Web Memory</h1>
+
+      <select
+        value={selectedCollection}
+        onChange={(e) =>
+          setSelectedCollection(
+            e.target.value
+          )
+        }
+      >
+        <option value="">
+          Select Collection
+        </option>
+
+        {collections.map((collection) => (
+          <option
+            key={collection.id}
+            value={collection.id}
+          >
+            {collection.name}
+          </option>
+        ))}
+      </select>
+
+      <button
+        onClick={
+          handleCreateCollection
+        }
+      >
+        + New Collection
+      </button>
+
+      <br />
+      <br />
 
       <button onClick={handleSave}>
         Save Current Page
@@ -71,23 +161,43 @@ export default function Popup() {
 
       <hr />
 
-      <h3>Saved Memories</h3>
+      <h3>Recent Memories</h3>
 
       <ul>
         {memories.map((memory) => (
-        <li key={memory.id}>
-          <span>{memory.title}</span>
-          <button onClick={() => handleDelete(memory.id)}> Delete </button>
-        </li>
+          <li
+            key={memory.id}
+            style={{
+              display: "flex",
+              justifyContent:
+                "space-between",
+              marginBottom: "8px",
+            }}
+          >
+            <span>{memory.title}</span>
+
+            <button
+              onClick={() =>
+                handleDelete(memory.id)
+              }
+            >
+              ❌
+            </button>
+          </li>
         ))}
       </ul>
 
-      <button onClick={() => { chrome.tabs.create({
-          url: chrome.runtime.getURL(
-            "memories.html"
-          ),
-        });
-      }}> View All </button>
+      <button
+        onClick={() => {
+          chrome.tabs.create({
+            url: chrome.runtime.getURL(
+              "memories.html"
+            ),
+          });
+        }}
+      >
+        View All
+      </button>
     </div>
   );
 }

@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { getMemories, searchMemories } from "../services/api";
+import { getMemories, searchMemories, getCollections, getMemoriesByCollection} from "../services/api";
 
 type Memory = {
   id: string;
@@ -10,10 +10,14 @@ type Memory = {
 
 export default function MemoriesPage() {
   const [memories, setMemories] = useState<Memory[]>([]);
+  const [collections, setCollections] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
+  const [selectedCollection, setSelectedCollection] = useState("");
 
   useEffect(() => {
     getMemories().then(setMemories);
+    getCollections().then(setCollections);
+
   }, []);
 
   async function handleSearch() {
@@ -34,8 +38,55 @@ export default function MemoriesPage() {
   }
 }
 
+async function handleCollectionChange(
+  collectionId: string
+) {
+  setSelectedCollection(
+    collectionId
+  );
+
+  if (!collectionId) {
+    const memories =
+      await getMemories();
+
+    setMemories(memories);
+
+    return;
+  }
+
+  const memories =
+    await getMemoriesByCollection(
+      collectionId
+    );
+
+  setMemories(memories);
+}
+
   return (
     <div style={{ padding: "20px" }}>
+        <select
+            value={selectedCollection}
+            onChange={(e) =>
+              handleCollectionChange(
+                e.target.value
+              )
+            }
+          >
+            <option value="">
+              All Collections
+            </option>
+
+            {collections.map(
+              (collection: any) => (
+                <option
+                  key={collection.id}
+                  value={collection.id}
+                >
+                  {collection.name}
+                </option>
+              )
+            )}
+        </select>
         <input type="text" placeholder="Search memories..." value={searchQuery} onChange={(e) =>
             setSearchQuery(e.target.value)}
         onKeyDown={(e) => {

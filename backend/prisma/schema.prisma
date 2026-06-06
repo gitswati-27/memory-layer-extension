@@ -7,11 +7,32 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+model Collection {
+  id        String   @id @default(cuid())
+  name      String   @unique
+  createdAt DateTime @default(now())
+
+  memories  Memory[]
+}
+
 model Memory {
-  id         String   @id @default(cuid())
-  title      String
-  url        String
-  content    String
-  summary    String?
-  createdAt  DateTime @default(now())
+  id          String   @id @default(cuid())
+  title       String
+  url         String
+  content     String
+  createdAt   DateTime @default(now())
+
+  collectionId String?
+  collection   Collection? @relation(fields: [collectionId], references: [id])
+}
+
+model MemoryChunk {
+  id        String   @id @default(cuid())
+
+  content   String
+
+  memoryId  String
+  memory    Memory @relation(fields: [memoryId], references: [id])
+
+  createdAt DateTime @default(now())
 }

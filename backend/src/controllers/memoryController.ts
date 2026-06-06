@@ -6,13 +6,14 @@ export const saveMemory = async (
   res: Response
 ) => {
   try {
-    const { title, url, content } = req.body;
+    const { title, url, content, collectionId} = req.body;
 
     const memory = await prisma.memory.create({
       data: {
         title,
         url,
         content,
+        collectionId,
       },
     });
 
@@ -118,3 +119,34 @@ export const searchMemories = async (
 
   res.json(memories);
 };
+
+export const getMemoriesByCollection =
+  async (
+    req: Request,
+    res: Response
+  ) => {
+    try {
+      const collectionId =
+        req.params.collectionId as string;
+
+      const memories =
+        await prisma.memory.findMany({
+          where: {
+            collectionId,
+          },
+
+          orderBy: {
+            createdAt: "desc",
+          },
+        });
+
+      res.json(memories);
+    } catch (error) {
+      console.error(error);
+
+      res.status(500).json({
+        error:
+          "Failed to fetch collection memories",
+      });
+    }
+  };

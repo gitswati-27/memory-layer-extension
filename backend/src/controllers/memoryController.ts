@@ -1,6 +1,8 @@
 import type { Request, Response } from "express";
 import { prisma } from "../db/prisma.js";
 import { chunkText } from "../utils/chunkText.js";
+import { generateEmbedding } from "../services/embeddingService.js";
+import { storeEmbedding } from "../services/storeEmbedding.js";
 
 export const saveMemory = async (
   req: Request,
@@ -20,12 +22,30 @@ export const saveMemory = async (
 
     const chunks = chunkText(content);
 
-    await prisma.memoryChunk.createMany({
-        data: chunks.map((chunk) => ({
-        content: chunk,
-        memoryId: memory.id,
-      })),
-    });
+    const createdChunks = await Promise.all(
+      chunks.map((chunk) =>
+      prisma.memoryChunk.create({
+      data: {
+          content: chunk,
+          memoryId: memory.id,
+        },
+      })
+      )
+    );
+
+    for (const chunk of createdChunks) {
+      const embedding =
+        await generateEmbedding(
+          chunk.content
+        );
+
+      if (embedding) {
+        await storeEmbedding(
+        chunk.id,
+        embedding
+      );
+      }
+    }
 
     res.status(201).json(memory);
   } catch (error) {

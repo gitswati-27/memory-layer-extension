@@ -82,7 +82,11 @@ export const deleteMemory = async (
 ) => {
   try {
     const id = req.params.id as string;
-
+    await prisma.memoryChunk.deleteMany({
+        where: {
+          memoryId: id,
+        },
+    });
     await prisma.memory.delete({
       where: { id },
     });
@@ -177,6 +181,48 @@ export const getMemoriesByCollection =
       res.status(500).json({
         error:
           "Failed to fetch collection memories",
+      });
+    }
+  };
+
+  export const semanticSearch =
+  async (
+    req: Request,
+    res: Response
+  ) => {
+    try {
+      const query = req.query.q as string;
+      const embedding = await generateEmbedding(query);
+      const vector = `[${embedding?.join(",")}]`;
+
+      const results =
+          await prisma.$queryRawUnsafe(`
+            SELECT
+              id,
+              content,
+              "memoryId",
+              embedding <=> '${vector}'::vector
+                AS distance
+            FROM "MemoryChunk"
+            WHERE embedding IS NOT NULL
+            ORDER BY embedding <=> '${vector}'::vector
+            LIMIT 5
+          `);
+
+      if (!query) {
+        return res.status(400).json({
+          error: "Query required",
+        });
+      }
+
+      res.json(results);
+      //console.log(embedding?.length);
+    } catch (error) {
+      console.error(error);
+
+      res.status(500).json({
+        error:
+          "Semantic search failed",
       });
     }
   };

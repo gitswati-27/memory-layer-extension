@@ -113,6 +113,15 @@ export default function Popup() {
   }
 }
 
+function openAssistant() {
+  chrome.tabs.create({
+    url:
+      chrome.runtime.getURL(
+        "memories.html?assistant=open"
+      ),
+  });
+}
+
   return (
     <div
       style={{
@@ -198,6 +207,7 @@ export default function Popup() {
       >
         View All
       </button>
+      <button onClick={openAssistant}>Open AI Assistant</button>
     </div>
   );
 }

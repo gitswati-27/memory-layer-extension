@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { getMemories, searchMemories, getCollections, getMemoriesByCollection} from "../services/api";
+import ChatWidget from "../components/ChatWidget";
 
 type Memory = {
   id: string;
@@ -13,12 +14,27 @@ export default function MemoriesPage() {
   const [collections, setCollections] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedCollection, setSelectedCollection] = useState("");
+  const [isChatOpen, setIsChatOpen] = useState(false);
 
   useEffect(() => {
     getMemories().then(setMemories);
     getCollections().then(setCollections);
 
   }, []);
+
+  useEffect(() => {
+  const params =
+    new URLSearchParams(
+      window.location.search
+    );
+
+  if (
+    params.get("assistant") ===
+    "open"
+  ) {
+    setIsChatOpen(true);
+  }
+}, []);
 
   async function handleSearch() {
   try {
@@ -110,6 +126,27 @@ async function handleCollectionChange(
           <hr />
         </div>
       ))}
+
+      <ChatWidget isOpen={isChatOpen} onClose={() =>setIsChatOpen(false)}/>
+        <button
+  onClick={() =>
+    setIsChatOpen(
+      (prev) => !prev
+    )
+  }
+  style={{
+    position: "fixed",
+    bottom: "20px",
+    right: "20px",
+    width: "60px",
+    height: "60px",
+    borderRadius: "50%",
+    fontSize: "24px",
+    cursor: "pointer",
+  }}
+>
+  {isChatOpen ? "✖" : "💬"}
+</button>
     </div>
   );
 }

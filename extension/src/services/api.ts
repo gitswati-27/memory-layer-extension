@@ -5,7 +5,7 @@ export async function saveMemory(memory: {
   collectionId?: string;
 }) {
   const response = await fetch(
-    "http://localhost:5000/memory/save",
+    "https://memory-layer-extension.onrender.com/memory/save",
     {
       method: "POST",
       headers: {
@@ -20,7 +20,7 @@ export async function saveMemory(memory: {
 
 export async function getMemories() {
   const response = await fetch(
-    "http://localhost:5000/memory"
+    "https://memory-layer-extension.onrender.com/memory"
   );
 
   return response.json();
@@ -28,7 +28,7 @@ export async function getMemories() {
 
 export async function getRecentMemories() {
   const response = await fetch(
-    "http://localhost:5000/memory/recent"
+    "https://memory-layer-extension.onrender.com/memory/recent"
   );
 
   return response.json();
@@ -36,7 +36,7 @@ export async function getRecentMemories() {
 
 export async function deleteMemory(id: string) {
   const response = await fetch(
-    `http://localhost:5000/memory/${id}`,
+    `https://memory-layer-extension.onrender.com/memory/${id}`,
     {
       method: "DELETE",
     }
@@ -49,7 +49,7 @@ export async function searchMemories(
   query: string
 ) {
   const response = await fetch(
-    `http://localhost:5000/memory/search?q=${encodeURIComponent(query)}`
+    `https://memory-layer-extension.onrender.com/memory/search?q=${encodeURIComponent(query)}`
   );
 
   return response.json();
@@ -57,7 +57,7 @@ export async function searchMemories(
 
 export async function getCollections() {
   const response = await fetch(
-    "http://localhost:5000/collections"
+    "https://memory-layer-extension.onrender.com/collections"
   );
 
   return response.json();
@@ -67,7 +67,7 @@ export async function createCollection(
   name: string
 ) {
   const response = await fetch(
-    "http://localhost:5000/collections",
+    "https://memory-layer-extension.onrender.com/collections",
     {
       method: "POST",
       headers: {
@@ -86,7 +86,7 @@ export async function getMemoriesByCollection(
   collectionId: string
 ) {
   const response = await fetch(
-    `http://localhost:5000/memory/collection/${collectionId}`
+    `https://memory-layer-extension.onrender.com/memory/collection/${collectionId}`
   );
 
   return response.json();

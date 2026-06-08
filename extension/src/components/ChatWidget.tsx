@@ -123,7 +123,7 @@ export default function ChatWidget({
 
     try {
       const response = await fetch(
-        "http://localhost:5000/memory/chat",
+        "https://memory-layer-extension.onrender.com/memory/chat",
         {
           method: "POST",
           headers: {

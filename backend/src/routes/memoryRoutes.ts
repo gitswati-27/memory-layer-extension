@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { saveMemory, getMemories, deleteMemory, getRecentMemories, searchMemories, getMemoriesByCollection, semanticSearch} from "../controllers/memoryController.js";
+import { saveMemory, getMemories, deleteMemory, getRecentMemories, searchMemories, getMemoriesByCollection, semanticSearch, chatWithMemory} from "../controllers/memoryController.js";
 
 const router = Router();
 
@@ -10,6 +10,7 @@ router.get("/recent", getRecentMemories);
 router.get("/search", searchMemories);
 router.get("/collection/:collectionId", getMemoriesByCollection);
 router.get("/semantic-search", semanticSearch);
+router.post("/chat", chatWithMemory);
 
 
 export default router;

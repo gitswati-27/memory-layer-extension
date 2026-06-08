@@ -3,6 +3,8 @@ import { prisma } from "../db/prisma.js";
 import { chunkText } from "../utils/chunkText.js";
 import { generateEmbedding } from "../services/embeddingService.js";
 import { storeEmbedding } from "../services/storeEmbedding.js";
+import { retrieveRelevantChunks } from "../services/retrievalService.js";
+import { askGroq } from "../services/chatService.js";
 
 export const saveMemory = async (
   req: Request,
@@ -195,20 +197,7 @@ export const getMemoriesByCollection =
       const embedding = await generateEmbedding(query);
       const vector = `[${embedding?.join(",")}]`;
 
-      const results =
-          await prisma.$queryRawUnsafe(`
-            SELECT
-              id,
-              content,
-              "memoryId",
-              embedding <=> '${vector}'::vector
-                AS distance
-            FROM "MemoryChunk"
-            WHERE embedding IS NOT NULL
-            ORDER BY embedding <=> '${vector}'::vector
-            LIMIT 5
-          `);
-
+      const results = await retrieveRelevantChunks(query);
       if (!query) {
         return res.status(400).json({
           error: "Query required",
@@ -223,6 +212,44 @@ export const getMemoriesByCollection =
       res.status(500).json({
         error:
           "Semantic search failed",
+      });
+    }
+  };
+
+  export const chatWithMemory =
+  async (
+    req: Request,
+    res: Response
+  ) => {
+    try {
+      const { question } = req.body;
+
+      if (!question) {
+        return res.status(400).json({
+          error: "Question required",
+        });
+      }
+
+      const chunks = await retrieveRelevantChunks(question);
+
+      const context = chunks.map(
+          (chunk) => `Title: ${chunk.title} URL: ${chunk.url} Content:${chunk.content}`).join("\n\n");
+
+      const answer =
+        await askGroq(
+          question,
+          context
+        );
+
+      res.json({
+        answer,
+      });
+    } catch (error) {
+      console.error(error);
+
+      res.status(500).json({
+        error:
+          "Failed to generate answer",
       });
     }
   };

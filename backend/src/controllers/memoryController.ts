@@ -12,7 +12,6 @@ export const saveMemory = async (
 ) => {
   try {
     const { title, url, content, collectionId} = req.body;
-
     const memory = await prisma.memory.create({
       data: {
         title,

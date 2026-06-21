@@ -142,43 +142,11 @@ Groq RAG Assistant
 
 ## Screenshots
 
-### Extension Popup
-
-<p align="center">
-  <img src="screenshots/interface.png" width="900">
-</p>
-
----
-
-### Memories Dashboard
-
-<p align="center">
-  <img src="screenshots/memories.png" width="900">
-</p>
-
----
-
-### Collections
-
-<p align="center">
-  <img src="screenshots/collections.png" width="900">
-</p>
-
----
-
-### Semantic Search
-
-<p align="center">
-  <img src="screenshots/semantic-search.png" width="900">
-</p>
-
----
-
-### AI Assistant
-
-<p align="center">
-  <img src="screenshots/ai-assistant.png" width="900">
-</p>
+![Extension Popup](Screenshots/interface.png)
+![Memories Dashboard](Screenshots/memories.png)
+![Collections](Screenshots/collections.png)
+![Semantic Search](Screenshots/semantic-search.png)
+![AI Assistant](Screenshots/ai-assistant.png)
 
 ---
 

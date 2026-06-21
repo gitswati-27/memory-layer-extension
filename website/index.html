@@ -1,0 +1,497 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Memory Layer Extension</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+
+  <!-- NAVBAR -->
+
+  <header class="navbar">
+    <div class="container nav-content">
+
+      <div class="logo">
+        <span class="logo-icon"><img src="../Screenshots/logo.png"></span>
+        <span>Memory Layer Extension</span>
+      </div>
+
+      <nav>
+        <ul class="nav-links">
+          <li><a href="#features">Features</a></li>
+          <li><a href="#workflow">How It Works</a></li>
+          <li><a href="#architecture">Architecture</a></li>
+          <li><a href="#screenshots">Screenshots</a></li>
+          <li><a href="#installation">Installation</a></li>
+        </ul>
+      </nav>
+
+    </div>
+  </header>
+
+  <!-- HERO -->
+
+  <section class="hero">
+
+    <div class="container hero-content">
+
+      <div class="hero-badge">
+        Chrome Extension • Semantic Search • RAG Assistant
+      </div>
+
+      <h1>
+        Organize Knowledge.
+        <br>
+        Retrieve Instantly.
+        <br>
+        Think Faster.
+      </h1>
+
+      <p class="hero-description">
+        Memory Layer Extension transforms saved webpages into a searchable,
+        AI-powered knowledge base. Save content, organize it into collections,
+        perform semantic search, and chat with your memories using Retrieval-Augmented Generation.
+      </p>
+
+      <div class="hero-buttons">
+
+        <a href="../docs/installation-guide.pdf" class="btn btn-primary">
+          Download Installation Guide
+        </a>
+
+        <a
+          href="https://github.com/gitswati-27/memory-layer-extension"
+          target="_blank"
+          class="btn btn-secondary"
+        >
+          View Source Code
+        </a>
+
+      </div>
+
+    </div>
+
+  </section>
+
+  <!-- PROBLEM -->
+
+  <section class="problem-section">
+
+    <div class="container">
+
+      <div class="section-heading">
+
+        <span class="section-tag">
+          Why Memory Layer?
+        </span>
+
+        <h2>
+          Stop Losing Valuable Knowledge
+        </h2>
+
+        <p>
+          The internet is full of useful information.
+          The challenge isn't finding knowledge.
+          It's finding it again.
+        </p>
+
+      </div>
+
+      <div class="problem-grid">
+
+        <div class="problem-card">
+          <h3>Bookmarks Become Cluttered</h3>
+          <p>
+            Valuable resources disappear into endless bookmark folders.
+          </p>
+        </div>
+
+        <div class="problem-card">
+          <h3>Browser History Is Temporary</h3>
+          <p>
+            Important articles get buried and become impossible to rediscover.
+          </p>
+        </div>
+
+        <div class="problem-card">
+          <h3>Knowledge Gets Fragmented</h3>
+          <p>
+            Learning materials end up scattered across dozens of websites.
+          </p>
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+  <!-- FEATURES -->
+
+  <section id="features" class="features-section">
+
+    <div class="container">
+
+      <div class="section-heading">
+
+        <span class="section-tag">
+          Features
+        </span>
+
+        <h2>
+          Everything You Need For Knowledge Retrieval
+        </h2>
+
+      </div>
+
+      <div class="features-grid">
+
+        <div class="feature-card">
+          <h3>Save Webpages</h3>
+          <p>
+            Capture webpage content directly from your browser.
+          </p>
+        </div>
+
+        <div class="feature-card">
+          <h3>Collections</h3>
+          <p>
+            Organize knowledge into meaningful categories.
+          </p>
+        </div>
+
+        <div class="feature-card">
+          <h3>Semantic Search</h3>
+          <p>
+            Find information by meaning, not just keywords.
+          </p>
+        </div>
+
+        <div class="feature-card">
+          <h3>AI Assistant</h3>
+          <p>
+            Chat with your saved knowledge using Retrieval-Augmented Generation.
+          </p>
+        </div>
+
+        <div class="feature-card">
+          <h3>Vector Retrieval</h3>
+          <p>
+            Powered by Gemini embeddings and pgvector similarity search.
+          </p>
+        </div>
+
+        <div class="feature-card">
+          <h3>Cloud Infrastructure</h3>
+          <p>
+            Built using modern full-stack cloud technologies.
+          </p>
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+  <!-- HOW IT WORKS -->
+
+  <section id="workflow" class="workflow-section">
+
+    <div class="container">
+
+      <div class="section-heading">
+
+        <span class="section-tag">
+          Workflow
+        </span>
+
+        <h2>
+          How It Works
+        </h2>
+
+      </div>
+
+      <div class="workflow-container">
+
+        <div class="workflow-step">Save Page</div>
+        <div class="workflow-arrow">↓</div>
+
+        <div class="workflow-step">Extract Content</div>
+        <div class="workflow-arrow">↓</div>
+
+        <div class="workflow-step">Generate Embeddings</div>
+        <div class="workflow-arrow">↓</div>
+
+        <div class="workflow-step">Store In PostgreSQL + pgvector</div>
+        <div class="workflow-arrow">↓</div>
+
+        <div class="workflow-step">Retrieve Relevant Context</div>
+        <div class="workflow-arrow">↓</div>
+
+        <div class="workflow-step">Generate AI Response</div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+  <!-- SCREENSHOTS -->
+
+  <section id="screenshots" class="screenshots-section">
+
+    <div class="container">
+
+      <div class="section-heading">
+
+        <span class="section-tag">
+          Product Preview
+        </span>
+
+        <h2>
+          Screenshots
+        </h2>
+
+      </div>
+
+      <div class="screenshots-grid">
+
+        <div class="screenshot-card">
+          <h3>Extension Popup</h3>
+          <div class="screenshot-placeholder">
+            <img src="../Screenshots/interface.png">
+          </div>
+        </div>
+
+        <div class="screenshot-card">
+          <h3>Memories Dashboard</h3>
+          <div class="screenshot-placeholder">
+            <img src="../Screenshots/memories.png">
+          </div>
+        </div>
+
+        <div class="screenshot-card">
+          <h3>Collections</h3>
+          <div class="screenshot-placeholder">
+            <img src="../Screenshots/collections.png">
+          </div>
+        </div>
+
+        <div class="screenshot-card">
+          <h3>Semantic Search</h3>
+          <div class="screenshot-placeholder">
+            <img src="../Screenshots/semantic-search.png">
+          </div>
+        </div>
+
+        <div class="screenshot-card">
+          <h3>AI Assistant</h3>
+          <div class="screenshot-placeholder">
+            <img src="../Screenshots/ai-assistant.png">
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+  <!-- ARCHITECTURE -->
+
+  <section id="architecture" class="architecture-section">
+
+    <div class="container">
+
+      <div class="section-heading">
+
+        <span class="section-tag">
+          Architecture
+        </span>
+
+        <h2>
+          Built Using Modern AI Infrastructure
+        </h2>
+
+      </div>
+
+      <div class="architecture-diagram">
+
+        <div class="arch-box">Chrome Extension</div>
+        <div class="arch-arrow">↓</div>
+
+        <div class="arch-box">Express Backend</div>
+        <div class="arch-arrow">↓</div>
+
+        <div class="arch-box">Neon PostgreSQL</div>
+        <div class="arch-arrow">↓</div>
+
+        <div class="arch-box">pgvector</div>
+        <div class="arch-arrow">↓</div>
+
+        <div class="arch-box">Gemini Embeddings</div>
+        <div class="arch-arrow">↓</div>
+
+        <div class="arch-box">Groq LLM</div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+  <!-- TECH STACK -->
+
+  <section class="tech-stack">
+
+    <div class="container">
+
+      <div class="section-heading">
+
+        <span class="section-tag">
+          Tech Stack
+        </span>
+
+        <h2>
+          Technologies Used
+        </h2>
+
+      </div>
+
+      <div class="tech-grid">
+
+        <span>React</span>
+        <span>TypeScript</span>
+        <span>Express</span>
+        <span>Prisma</span>
+        <span>Neon</span>
+        <span>PostgreSQL</span>
+        <span>pgvector</span>
+        <span>Gemini</span>
+        <span>Groq</span>
+        <span>Render</span>
+        <span>Chrome Extensions API</span>
+
+      </div>
+
+    </div>
+
+  </section>
+
+  <!-- INSTALLATION -->
+
+  <section id="installation" class="installation-section">
+
+    <div class="container">
+
+      <div class="section-heading">
+
+        <span class="section-tag">
+          Installation
+        </span>
+
+        <h2>
+          Hosted & Self-Hosted Options
+        </h2>
+
+      </div>
+
+      <div class="install-grid">
+
+        <div class="install-card">
+
+          <h3>Hosted Mode</h3>
+
+          <p>
+            Use the publicly deployed backend for quick setup and testing.
+          </p>
+
+          <code>
+            https://memory-layer-extension.onrender.com
+          </code>
+
+        </div>
+
+        <div class="install-card">
+
+          <h3>Self Hosted Mode</h3>
+
+          <p>
+            Deploy your own backend and use your own Neon,
+            Gemini and Groq credentials.
+          </p>
+
+          <ul>
+            <li>Neon Database</li>
+            <li>Gemini API Key</li>
+            <li>Groq API Key</li>
+            <li>Render Deployment</li>
+          </ul>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+  <!-- CTA -->
+
+  <section class="cta-section">
+
+    <div class="container cta-content">
+
+      <h2>
+        Ready To Try Memory Layer Extension?
+      </h2>
+
+      <p>
+        Download the complete installation guide and
+        start building your personal AI-powered second brain.
+      </p>
+
+      <a href="installation-guide.pdf" class="btn btn-primary">
+        Download Installation Guide
+      </a>
+
+    </div>
+
+  </section>
+
+  <!-- FOOTER -->
+
+  <footer>
+
+    <div class="container footer-content">
+
+      <h3>Memory Layer Extension</h3>
+
+      <p>
+        Built by Swati
+      </p>
+
+      <a
+        href="https://github.com/gitswati-27/memory-layer-extension"
+        target="_blank"
+      >
+        github.com/gitswati-27/memory-layer-extension
+      </a>
+
+    </div>
+
+  </footer>
+
+</body>
+</html>
+

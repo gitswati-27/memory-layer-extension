@@ -282,7 +282,7 @@ async function handleCollectionChange(
       <div className="mp-root">
         <header className="mp-header">
           <span className="mp-label">Memory Archive</span>
-          <h1 className="mp-title">All Memories</h1>
+          <h1 className="mp-title">All pages</h1>
 
           <div className="mp-controls">
             <select
@@ -332,7 +332,7 @@ async function handleCollectionChange(
 
         <div className="mp-memories-list">
           {memories.length === 0 ? (
-            <p className="mp-empty">No memories found.</p>
+            <p className="mp-empty">No pages found.</p>
           ) : (
             memories.map((memory, i) => (
               <div

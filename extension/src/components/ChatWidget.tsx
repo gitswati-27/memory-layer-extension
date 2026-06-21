@@ -76,7 +76,7 @@ export default function ChatWidget({
     {
       role: "assistant",
       content:
-        "Hi! Ask me anything about your saved memories.",
+        "Hi! Ask me anything about your saved webpages.",
     },
   ];
 });
@@ -412,7 +412,7 @@ export default function ChatWidget({
               <div className="cw-thinking-dots">
                 <span /><span /><span />
               </div>
-              Assistant is thinking...
+              Searching...
             </div>
           )}
 
@@ -428,7 +428,7 @@ export default function ChatWidget({
                 e.target.value
               )
             }
-            placeholder="Ask about your memories..."
+            placeholder="Ask anything about pages saved by you..."
             className="cw-input"
             onKeyDown={(e) => {
               if (

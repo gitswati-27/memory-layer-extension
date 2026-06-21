@@ -392,7 +392,7 @@ function openAssistant() {
 
       <div className="pp-root">
         <header className="pp-header">
-          <span className="pp-label">Browser Extension</span>
+          <span className="pp-label">Save your pages on-the-go</span>
           <h1 className="pp-title">AI Web Memory</h1>
         </header>
 
@@ -436,11 +436,11 @@ function openAssistant() {
 
           <div className="pp-divider" />
 
-          <span className="pp-recent-label">Recent Memories</span>
+          <span className="pp-recent-label">Recently saved</span>
 
           <ul className="pp-memories-list">
             {memories.length === 0 ? (
-              <p className="pp-empty">No memories saved yet.</p>
+              <p className="pp-empty">Nothing saved yet.</p>
             ) : (
               memories.map((memory) => (
                 <li
@@ -474,9 +474,9 @@ function openAssistant() {
               });
             }}
           >
-            View All
+            View All Saved Pages
           </button>
-          <button className="pp-footer-btn teal" onClick={openAssistant}>Open AI Assistant</button>
+          <button className="pp-footer-btn teal" onClick={openAssistant}>Open AI Help</button>
         </footer>
       </div>
     </>

@@ -145,7 +145,7 @@ Groq RAG Assistant
 ### Extension Popup
 
 <p align="center">
-  <img src="screenshots/popup.png" width="900">
+  <img src="screenshots/interface.png" width="900">
 </p>
 
 ---
@@ -153,7 +153,7 @@ Groq RAG Assistant
 ### Memories Dashboard
 
 <p align="center">
-  <img src="screenshots/dashboard.png" width="900">
+  <img src="screenshots/memories.png" width="900">
 </p>
 
 ---
@@ -169,7 +169,7 @@ Groq RAG Assistant
 ### Semantic Search
 
 <p align="center">
-  <img src="screenshots/search.png" width="900">
+  <img src="screenshots/semantic-search.png" width="900">
 </p>
 
 ---
@@ -177,7 +177,7 @@ Groq RAG Assistant
 ### AI Assistant
 
 <p align="center">
-  <img src="screenshots/chat.png" width="900">
+  <img src="screenshots/ai-assistant.png" width="900">
 </p>
 
 ---
